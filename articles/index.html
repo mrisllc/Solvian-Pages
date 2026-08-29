@@ -1,19 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Articles — Solvian</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solvian Articles</title>
 </head>
-
 <body>
 
-    <h1>Solvian Articles</h1>
+<h1>Solvian Articles</h1>
+<p>All official Solvian articles</p>
 
-    <p>
-        Welcome to the Solvian Articles section.
-    </p>
+<div id="list">Loading...</div>
+
+<script>
+fetch("articles.json")
+.then(r=>r.json())
+.then(data=>{
+  const list=document.getElementById("list");
+  list.innerHTML="";
+  data.forEach(a=>{
+    list.innerHTML+=`
+      <div style="border:1px solid #ccc;padding:12px;margin:10px 0">
+        <h3>${a.title}</h3>
+        <p>${a.description}</p>
+        <small>${a.category} • ${a.date}</small><br><br>
+        <a href="${a.url}">Read Article →</a>
+      </div>
+    `;
+  });
+})
+.catch(()=>{
+  document.getElementById("list").innerHTML="No articles found.";
+});
+</script>
 
 </body>
 </html>
