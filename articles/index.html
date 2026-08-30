@@ -1,38 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Solvian Articles</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Solvian Help & Support</title>
+<style>
+:root{--p:#2563eb;--bg:#f4f6fb;--c:#fff;--t:#111827;--m:#6b7280}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--t)}
+header{position:sticky;top:0;background:var(--c);display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #e5e7eb}
+.logo{font-weight:700;font-size:20px}.lang{padding:8px 10px;border:1px solid #ddd;border-radius:8px}
+.hero{background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;padding:26px 16px}
+.hero h1{margin:0 0 8px}.hero p{margin:0;opacity:.95}
+.wrap{max-width:900px;margin:auto;padding:16px}
+.search{width:100%;padding:14px;border:1px solid #d1d5db;border-radius:12px;font-size:15px}
+.sec{margin:18px 0 10px;font-weight:700}
+.card{background:#fff;border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.card h3{margin:0 0 6px}.meta{font-size:12px;color:var(--m);margin-bottom:10px}
+.btn{display:inline-block;background:var(--p);color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none}
+footer{background:#fff;border-top:1px solid #e5e7eb;text-align:center;padding:20px;color:var(--m);margin-top:20px}
+</style>
 </head>
 <body>
-
-<h1>Solvian Articles</h1>
-<p>All official Solvian articles</p>
-
-<div id="list">Loading...</div>
-
+<header><div class="logo">Solvian</div><select class="lang"><option>বাংলা</option><option>English</option><option>العربية</option></select></header>
+<section class="hero"><h1>Help & Support</h1><p>সকল গাইড, FAQ ও অফিসিয়াল নিবন্ধ এক জায়গায়</p></section>
+<div class="wrap">
+<input id="search" class="search" type="search" placeholder="আর্টিকেল খুঁজুন...">
+<div class="sec">সর্বশেষ নিবন্ধ</div>
+<div id="list"></div>
+</div>
+<footer>© 2026 Solvian · Privacy · Terms · Help Center</footer>
 <script>
-fetch("articles.json")
-.then(r=>r.json())
-.then(data=>{
-  const list=document.getElementById("list");
-  list.innerHTML="";
-  data.forEach(a=>{
-    list.innerHTML+=`
-      <div style="border:1px solid #ccc;padding:12px;margin:10px 0">
-        <h3>${a.title}</h3>
-        <p>${a.description}</p>
-        <small>${a.category} • ${a.date}</small><br><br>
-        <a href="${a.url}">Read Article →</a>
-      </div>
-    `;
-  });
-})
-.catch(()=>{
-  document.getElementById("list").innerHTML="No articles found.";
-});
+let data=[];
+function render(items){
+ const box=document.getElementById("list");box.innerHTML="";
+ if(items.length===0){box.innerHTML="<p>কোন আর্টিকেল পাওয়া যায়নি।</p>";return;}
+ items.forEach(a=>box.innerHTML+=`<div class="card"><h3>${a.title}</h3><div class="meta">${a.category} · ${a.date}</div><p>${a.description}</p><a class="btn" href="${a.url}">পড়ুন</a></div>`);
+}
+fetch("articles.json").then(r=>r.json()).then(j=>{data=j;render(j)}).catch(()=>{document.getElementById("list").innerHTML="<p>articles.json পাওয়া যায়নি।</p>"});
+document.getElementById("search").oninput=e=>{const q=e.target.value.toLowerCase();render(data.filter(a=>a.title.toLowerCase().includes(q)||a.description.toLowerCase().includes(q)||a.category.toLowerCase().includes(q)));};
 </script>
-
 </body>
 </html>
