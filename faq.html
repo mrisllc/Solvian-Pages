@@ -3,17 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>FAQ — Solvian</title>
+    <title>Frequently Asked Questions - Solvian</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+            padding: 25px 5%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 12px;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        .intro-text {
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+            color: #555;
+        }
+        .faq-container {
+            margin-bottom: 40px;
+        }
+        details {
+            background: #f8f9fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            transition: background 0.3s;
+        }
+        details[open] {
+            background: #ffffff;
+            border-color: #3498db;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        summary {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #2c3e50;
+            cursor: pointer;
+            outline: none;
+            list-style: none;
+            position: relative;
+            padding-right: 20px;
+        }
+        summary::-webkit-details-marker {
+            display: none;
+        }
+        summary::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            font-size: 1.4rem;
+            color: #3498db;
+            font-weight: bold;
+            line-height: 1;
+        }
+        details[open] summary::after {
+            content: '-';
+        }
+        .faq-answer {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
+            color: #444;
+            font-size: 1rem;
+        }
+        .contact-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 5px solid #3498db;
+            margin-top: 30px;
+            border-radius: 4px;
+        }
+        footer {
+            text-align: center;
+            padding: 25px 0;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+        }
+    </style>
 </head>
-
 <body>
-
     <h1>Frequently Asked Questions</h1>
+    <p class="intro-text">This is the official FAQ page for Solvian. Find answers to common questions about our services, support, and platform usage.</p>
 
-    <p>
-        This is the official FAQ page for Solvian.
-    </p>
+    <div class="faq-container">
+        <details>
+            <summary>What is Solvian?</summary>
+            <div class="faq-answer">
+                Solvian is an official digital platform dedicated to providing reliable solutions, resources, and services. Our goal is to ensure a seamless experience for all our users.
+            </div>
+        </details>
 
+        <details>
+            <summary>How can I contact customer support?</summary>
+            <div class="faq-answer">
+                You can reach our support team directly via email at <strong>contact.mrisllc@gmail.com</strong> or call us at <strong>+880 1937 061091</strong> for immediate assistance.
+            </div>
+        </details>
+
+        <details>
+            <summary>How do I report a problem or website error?</summary>
+            <div class="faq-answer">
+                If you encounter any bugs, payment issues, or errors on our website, please visit our <strong>Report a Problem</strong> page to submit your details directly to our team.
+            </div>
+        </details>
+
+        <details>
+            <summary>Are Solvian services free to access?</summary>
+            <div class="faq-answer">
+                Most of our platform information and standard features are freely accessible. Specific premium services or products may have designated pricing structures.
+            </div>
+        </details>
+
+        <details>
+            <summary>How secure is my data on Solvian?</summary>
+            <div class="faq-answer">
+                We prioritize user privacy and security. Any information you share through our official contact channels or forms is handled with strict confidentiality.
+            </div>
+        </details>
+    </div>
+
+    <div class="contact-info">
+        <p>Still have questions? Feel free to reach out to us:</p>
+        <p><strong>Email:</strong> contact.mrisllc@gmail.com<br>
+        <strong>Phone:</strong> +880 1937 061091</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Solvian. All rights reserved.</p>
+    </footer>
 </body>
 </html>
+
+    
