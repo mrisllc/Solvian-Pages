@@ -44,7 +44,7 @@
             outline: none;
         }
 
-        /* হরিজন্টাল স্ক্রল ক্যাটাগরি বার ডিজাইন (মোবাইল ও মাউস স্ক্রলিং অপ্টিমাইজড) */
+        /* হরিজন্টাল স্ক্রল ক্যাটাগরি বার (স্টিকি উঠিয়ে দেওয়া হয়েছে, যাতে কন্টেন্ট স্ক্রল করলে এটি স্বাভাবিক নিয়মে উপরে উঠে যায়) */
         .category-scroll-container {
             display: flex;
             overflow-x: auto;
@@ -54,7 +54,6 @@
             border-bottom: 1px solid #e0e0e0;
             gap: 10px;
             scrollbar-width: thin;
-            -webkit-overflow-scrolling: touch; /* আইওএস ডিভাইসে স্মুথ স্ক্রলিং */
         }
         .category-scroll-container::-webkit-scrollbar {
             height: 4px;
@@ -84,11 +83,16 @@
             border-color: #0d6efd;
         }
 
-        /* কন্টেন্ট প্রদর্শনের মূল এরিয়া (আইফ্রেমের বদলে ফেচ ও ইউআরএল রিজল্ভ ব্যবহার করায় খালি জায়গা সমস্যার সমাধান) */
+        /* কন্টেন্ট প্রদর্শনের জন্য আইফ্রেম এরিয়া */
         .content-area {
-            padding: 20px;
+            width: 100%;
             background-color: #ffffff;
-            min-height: 80vh;
+        }
+        .content-area iframe {
+            width: 100%;
+            border: none;
+            overflow: hidden;
+            display: block;
         }
     </style>
 </head>
@@ -114,9 +118,9 @@
         <button class="cat-btn" data-key="articles" onclick="loadContent('https://mrisllc.github.io/Solvian-Pages/articles/', this)">Articles</button>
     </div>
 
-    <!-- ডায়নামিক কন্টেন্ট লোড হওয়ার এরিয়া -->
-    <div class="content-area" id="contentArea">
-        <!-- এখানে কন্টেন্ট লোড হবে -->
+    <!-- ডায়নামিক কন্টেন্ট লোড হওয়ার আইফ্রেম এরিয়া -->
+    <div class="content-area">
+        <iframe id="contentFrame" src="https://mrisllc.github.io/Solvian-Pages/terms-of-service.html" title="Solvian Content"></iframe>
     </div>
 
     <script>
@@ -140,60 +144,38 @@
             }
         };
 
-        // পেজ লোড হওয়ার সাথে সাথে প্রথম কন্টেন্ট (Terms of Service) লোড করা
-        window.onload = function() {
-            loadContent('https://mrisllc.github.io/Solvian-Pages/terms-of-service.html', document.querySelector('.cat-btn.active'));
+        const iframe = document.getElementById('contentFrame');
+
+        // পেজ লোড হওয়ার পর আইফ্রেমের উচ্চতা সেট করা
+        iframe.onload = function() {
+            adjustIframeHeight();
         };
 
-        // ফেচ (Fetch) এর মাধ্যমে লিংক থেকে কন্টেন্ট এনে এবং রিলেটিভ লিংক ফিক্স করে দেখানোর ফাংশন
-        async function loadContent(url, element) {
-            // সব বাটন থেকে active ক্লাস সরিয়ে ফেলা এবং ক্লিক করা বাটনে যোগ করা
+        // লিংক পরিবর্তনের ফাংশন
+        function loadContent(url, element) {
             let buttons = document.querySelectorAll('.cat-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             element.classList.add('active');
 
-            const contentArea = document.getElementById('contentArea');
-            contentArea.innerHTML = "<p style='text-align:center; padding: 40px; color:#666;'>Loading...</p>";
+            iframe.src = url;
+            window.scrollTo(0, 0); // পেজের উপরে স্ক্রল নিয়ে যাওয়া
+        }
 
+        // নিখুঁতভাবে আইফ্রেমের কন্টেন্টের উচ্চতা পরিমাপ করে অতিরিক্ত খালি জায়গা তৈরি হওয়া রোধ করা
+        function adjustIframeHeight() {
             try {
-                const response = await fetch(url);
-                const htmlText = await response.text();
-                
-                // HTML পার্স করা
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(htmlText, 'text/html');
-                
-                // রিলেটিভ লিংকগুলোকে অ্যাবসোলিউট লিংকে রূপান্তর করা যাতে স্টাইল, স্ক্রিপ্ট ও ছবি ঠিকমতো কাজ করে
-                const baseUrl = new URL(url);
-                doc.querySelectorAll('link[href]').forEach(el => {
-                    el.href = new URL(el.getAttribute('href'), baseUrl).href;
-                });
-                doc.querySelectorAll('script[src]').forEach(el => {
-                    el.src = new URL(el.getAttribute('src'), baseUrl).href;
-                });
-                doc.querySelectorAll('img[src]').forEach(el => {
-                    el.src = new URL(el.getAttribute('src'), baseUrl).href;
-                });
-                doc.querySelectorAll('a[href]').forEach(el => {
-                    el.href = new URL(el.getAttribute('href'), baseUrl).href;
-                });
-
-                // টেমপ্লেটের সিএসএস স্টাইলগুলো সংগ্রহ করা
-                let headContent = "";
-                doc.querySelectorAll('style').forEach(style => {
-                    headContent += style.outerHTML;
-                });
-                doc.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
-                    headContent += link.outerHTML;
-                });
-
-                const bodyContent = doc.body ? doc.body.innerHTML : htmlText;
-                
-                // কন্টেন্ট এরিয়াতে স্টাইলসহ বডি ইনজেক্ট করা
-                contentArea.innerHTML = headContent + bodyContent;
-                window.scrollTo(0, 0); // কন্টেন্ট পরিবর্তনের পর পেজের উপরে স্ক্রল নিয়ে যাওয়া
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                if (iframeDoc) {
+                    const body = iframeDoc.body;
+                    const html = iframeDoc.documentElement;
+                    const height = Math.max(
+                        body.scrollHeight, body.offsetHeight,
+                        html.clientHeight, html.scrollHeight, html.offsetHeight
+                    );
+                    iframe.style.height = height + 'px';
+                }
             } catch (error) {
-                contentArea.innerHTML = `<p style='text-align:center; padding: 40px; color:red;'>Failed to load content. Please ensure you are running this via a local server or hosted environment.</p>`;
+                iframe.style.height = '600px';
             }
         }
 
@@ -201,10 +183,8 @@
         function changeLanguage() {
             const selectedLang = document.getElementById('languageSelect').value;
             
-            // টপবারের শিরোনাম পরিবর্তন
             document.getElementById('topTitle').innerText = translations[selectedLang].topTitle;
             
-            // সব ক্যাটাগরি বাটনের টেক্সট নির্বাচিত ভাষা অনুযায়ী আপডেট করা
             const buttons = document.querySelectorAll('.cat-btn');
             buttons.forEach(btn => {
                 const key = btn.getAttribute('data-key');
