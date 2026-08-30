@@ -1,99 +1,600 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Solvian Help Center</title>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+<link rel="stylesheet"
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,sans-serif;background:#F5F7FB;color:#111827}
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:#fff;border-bottom:1px solid #E5E7EB;position:sticky;top:0}
-.logo{font-size:20px;font-weight:700;color:#2563EB}
-.hero{background:#2563EB;color:#fff;padding:18px 16px}
-.hero h1{font-size:22px;margin-bottom:4px}
-.hero p{font-size:14px;opacity:.95}
-.container{max-width:900px;margin:auto;padding:16px}
-.card{display:flex;align-items:center;gap:14px;background:#fff;border-radius:16px;padding:16px;margin-bottom:14px;text-decoration:none;color:#111827;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-.icon{width:52px;height:52px;border-radius:14px;background:#EEF4FF;display:flex;align-items:center;justify-content:center;color:#2563EB;flex-shrink:0}
-.material-symbols-outlined{font-size:28px}
-.content h2{font-size:17px;margin-bottom:4px}
-.content p{font-size:13px;color:#6B7280;line-height:1.4}
-.arrow{margin-left:auto;color:#9CA3AF}
-footer{margin-top:24px;padding:22px 16px;text-align:center;background:#fff;border-top:1px solid #E5E7EB}
-footer a{text-decoration:none;color:#2563EB;font-size:14px;margin:0 8px}
-.copy{margin-top:10px;font-size:13px;color:#6B7280}
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body{
+    font-family:Arial,sans-serif;
+    background:#F5F7FB;
+    color:#111827;
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 16px;
+    background:#fff;
+    border-bottom:1px solid #E5E7EB;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:700;
+    color:#2563EB;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    background:#2563EB;
+    color:#fff;
+    padding:18px 16px;
+}
+
+.hero h1{
+    font-size:22px;
+    margin-bottom:4px;
+}
+
+.hero p{
+    font-size:14px;
+    opacity:.95;
+}
+
+
+/* =========================
+   CATEGORY MENU
+========================= */
+
+.category-menu{
+    display:flex;
+    overflow-x:auto;
+    gap:10px;
+    padding:12px 16px;
+    background:#fff;
+    border-bottom:1px solid #E5E7EB;
+}
+
+.category-menu::-webkit-scrollbar{
+    display:none;
+}
+
+
+/* =========================
+   CATEGORY BUTTON
+========================= */
+
+.tab{
+    white-space:nowrap;
+    padding:10px 16px;
+    border-radius:999px;
+    background:#EEF4FF;
+    color:#2563EB;
+    font-weight:600;
+    cursor:pointer;
+    border:0;
+    font-family:Arial,sans-serif;
+    font-size:14px;
+    flex-shrink:0;
+}
+
+.tab.active{
+    background:#2563EB;
+    color:#fff;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:16px;
+}
+
+
+/* =========================
+   CONTENT AREA
+========================= */
+
+.content-area{
+    background:#fff;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+
+/* =========================
+   CONTENT HEADER
+========================= */
+
+.content-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 16px;
+    background:#fff;
+    border-bottom:1px solid #E5E7EB;
+}
+
+.back-btn{
+    width:40px;
+    height:40px;
+    border:0;
+    border-radius:12px;
+    background:#EEF4FF;
+    color:#2563EB;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+
+.content-title{
+    font-size:16px;
+    font-weight:700;
+}
+
+
+/* =========================
+   EMPTY CONTENT
+========================= */
+
+.empty-content{
+    min-height:300px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px 20px;
+    color:#6B7280;
+}
+
+.empty-icon{
+    width:64px;
+    height:64px;
+    border-radius:18px;
+    background:#EEF4FF;
+    color:#2563EB;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:16px;
+}
+
+.empty-icon .material-symbols-outlined{
+    font-size:34px;
+}
+
+.empty-content h2{
+    font-size:18px;
+    color:#111827;
+    margin-bottom:8px;
+}
+
+.empty-content p{
+    font-size:14px;
+    line-height:1.5;
+}
+
+
+/* =========================
+   IFRAME
+========================= */
+
+.content-frame{
+    width:100%;
+    height:75vh;
+    min-height:500px;
+    border:0;
+    display:none;
+    background:#fff;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top:24px;
+    padding:22px 16px;
+    text-align:center;
+    background:#fff;
+    border-top:1px solid #E5E7EB;
+}
+
+footer a{
+    text-decoration:none;
+    color:#2563EB;
+    font-size:14px;
+    margin:0 8px;
+}
+
+.copy{
+    margin-top:10px;
+    font-size:13px;
+    color:#6B7280;
+}
+
 </style>
+
 </head>
+
+
 <body>
 
+
+<!-- =========================
+     TOP BAR
+========================= -->
+
 <header class="topbar">
-<div class="logo">Solvian</div>
+
+    <div class="logo">
+        Solvian
+    </div>
+
 </header>
 
+
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="hero">
-<h1>সহায়তা কেন্দ্র</h1>
-<p>Solvian-এর সকল সহায়তা ও তথ্য এক জায়গায়</p>
+
+    <h1>
+        সহায়তা কেন্দ্র
+    </h1>
+
+    <p>
+        Solvian-এর সকল সহায়তা ও তথ্য এক জায়গায়
+    </p>
+
 </section>
+
+
+<!-- =========================
+     CATEGORY MENU
+========================= -->
+
+<div class="category-menu">
+
+
+    <button
+        class="tab"
+        onclick="openContent(
+            'https://mrisllc.github.io/Solvian-Pages/articles/',
+            'Articles',
+            this
+        )">
+
+        Articles
+
+    </button>
+
+
+    <button
+        class="tab"
+        onclick="openContent(
+            'https://mrisllc.github.io/Solvian-Pages/faq.html',
+            'FAQ',
+            this
+        )">
+
+        FAQ
+
+    </button>
+
+
+    <button
+        class="tab"
+        onclick="openContent(
+            'https://mrisllc.github.io/Solvian-Pages/privacy-policy.html',
+            'Privacy Policy',
+            this
+        )">
+
+        Privacy
+
+    </button>
+
+
+    <button
+        class="tab"
+        onclick="openContent(
+            'https://mrisllc.github.io/Solvian-Pages/terms-of-service.html',
+            'Terms of Service',
+            this
+        )">
+
+        Terms
+
+    </button>
+
+
+    <button
+        class="tab"
+        onclick="openContent(
+            'https://mrisllc.github.io/Solvian-Pages/report-problem.html',
+            'Report a Problem',
+            this
+        )">
+
+        Report
+
+    </button>
+
+
+</div>
+
+
+<!-- =========================
+     CONTENT
+========================= -->
 
 <div class="container">
 
-<a class="card" href="articles/">
-<div class="icon"><span class="material-symbols-outlined">article</span></div>
-<div class="content">
-<h2>Articles</h2>
-<p>গাইড, টিউটোরিয়াল ও অফিসিয়াল নিবন্ধ</p>
-</div>
-<div class="arrow"><span class="material-symbols-outlined">chevron_right</span></div>
-</a>
+    <div class="content-area">
 
-<a class="card" href="faq.html">
-<div class="icon"><span class="material-symbols-outlined">quiz</span></div>
-<div class="content">
-<h2>FAQ</h2>
-<p>প্রায় জিজ্ঞাসিত প্রশ্ন ও উত্তর</p>
-</div>
-<div class="arrow"><span class="material-symbols-outlined">chevron_right</span></div>
-</a>
 
-<a class="card" href="report-problem.html">
-<div class="icon"><span class="material-symbols-outlined">report_problem</span></div>
-<div class="content">
-<h2>Report a Problem</h2>
-<p>সমস্যা রিপোর্ট করুন ও সহায়তা নিন</p>
-</div>
-<div class="arrow"><span class="material-symbols-outlined">chevron_right</span></div>
-</a>
+        <!-- CONTENT HEADER -->
 
-<a class="card" href="privacy-policy.html">
-<div class="icon"><span class="material-symbols-outlined">shield_lock</span></div>
-<div class="content">
-<h2>Privacy Policy</h2>
-<p>গোপনীয়তা ও তথ্য সুরক্ষা নীতি</p>
-</div>
-<div class="arrow"><span class="material-symbols-outlined">chevron_right</span></div>
-</a>
+        <div class="content-header">
 
-<a class="card" href="terms-of-service.html">
-<div class="icon"><span class="material-symbols-outlined">gavel</span></div>
-<div class="content">
-<h2>Terms of Service</h2>
-<p>Solvian ব্যবহারের শর্তাবলী</p>
-</div>
-<div class="arrow"><span class="material-symbols-outlined">chevron_right</span></div>
-</a>
+            <button
+                class="back-btn"
+                onclick="closeContent()">
+
+                <span class="material-symbols-outlined">
+                    arrow_back
+                </span>
+
+            </button>
+
+
+            <div
+                id="contentTitle"
+                class="content-title">
+
+                Help Center
+
+            </div>
+
+        </div>
+
+
+        <!-- DEFAULT CONTENT -->
+
+        <div
+            id="emptyContent"
+            class="empty-content">
+
+            <div class="empty-icon">
+
+                <span class="material-symbols-outlined">
+                    help_center
+                </span>
+
+            </div>
+
+
+            <h2>
+                সহায়তা নির্বাচন করুন
+            </h2>
+
+
+            <p>
+                উপরের Category Menu থেকে একটি বিভাগ নির্বাচন করুন।
+            </p>
+
+        </div>
+
+
+        <!-- ACTUAL CONTENT -->
+
+        <iframe
+            id="contentFrame"
+            class="content-frame"
+            title="Solvian Help Center Content">
+        </iframe>
+
+
+    </div>
 
 </div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
-<div>
-<a href="privacy-policy.html">Privacy Policy</a> ·
-<a href="terms-of-service.html">Terms of Service</a>
-</div>
-<div class="copy">© 2026 MRIS LLC. All rights reserved.</div>
+
+    <div>
+
+        <a
+            href="https://mrisllc.github.io/Solvian-Pages/privacy-policy.html">
+
+            Privacy Policy
+
+        </a>
+
+        ·
+
+        <a
+            href="https://mrisllc.github.io/Solvian-Pages/terms-of-service.html">
+
+            Terms of Service
+
+        </a>
+
+    </div>
+
+
+    <div class="copy">
+
+        © 2026 MRIS LLC. All rights reserved.
+
+    </div>
+
 </footer>
 
+
+<script>
+
+/* =========================
+   OPEN CATEGORY CONTENT
+========================= */
+
+function openContent(url, title, button){
+
+    /* Remove active state */
+
+    document
+        .querySelectorAll('.tab')
+        .forEach(function(tab){
+
+            tab.classList.remove('active');
+
+        });
+
+
+    /* Active selected category */
+
+    button.classList.add('active');
+
+
+    /* Change title */
+
+    document
+        .getElementById('contentTitle')
+        .textContent = title;
+
+
+    /* Hide default content */
+
+    document
+        .getElementById('emptyContent')
+        .style.display = 'none';
+
+
+    /* Show iframe */
+
+    const frame =
+        document.getElementById('contentFrame');
+
+    frame.style.display = 'block';
+
+
+    /* Load GitHub Pages */
+
+    frame.src = url;
+
+
+    /* Scroll to content */
+
+    document
+        .querySelector('.content-area')
+        .scrollIntoView({
+            behavior:'smooth',
+            block:'start'
+        });
+
+}
+
+
+/* =========================
+   CLOSE CONTENT
+========================= */
+
+function closeContent(){
+
+    /* Clear iframe */
+
+    document
+        .getElementById('contentFrame')
+        .src = 'about:blank';
+
+
+    /* Hide iframe */
+
+    document
+        .getElementById('contentFrame')
+        .style.display = 'none';
+
+
+    /* Show default content */
+
+    document
+        .getElementById('emptyContent')
+        .style.display = 'flex';
+
+
+    /* Reset title */
+
+    document
+        .getElementById('contentTitle')
+        .textContent = 'Help Center';
+
+
+    /* Remove active category */
+
+    document
+        .querySelectorAll('.tab')
+        .forEach(function(tab){
+
+            tab.classList.remove('active');
+
+        });
+
+}
+
+</script>
+
+
 </body>
-</html>
+
+  </html>
