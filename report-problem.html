@@ -1,19 +1,541 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Report a problem with Solvian. Submit bugs, account issues, technical problems, or other feedback.">
 
-    <title>Report a Problem — Solvian</title>
-</head>
+<title>Report a Problem - Solvian</title>
 
-<body>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
+    :root {
+        --primary: #3498db;
+        --primary-dark: #2980b9;
+        --text: #2c3e50;
+        --secondary-text: #5f6b76;
+        --border: #d9dee3;
+        --background: #ffffff;
+        --surface: #f7f9fb;
+        --success: #18864b;
+        --error: #c62828;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            Arial,
+            Helvetica,
+            sans-serif;
+        line-height: 1.6;
+        color: var(--text);
+        background: var(--background);
+        padding: 24px 16px;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    header {
+        margin-bottom: 28px;
+    }
+
+    h1 {
+        color: var(--text);
+        font-size: clamp(1.8rem, 5vw, 2.3rem);
+        line-height: 1.25;
+        border-bottom: 2px solid #eeeeee;
+        padding-bottom: 12px;
+        margin-bottom: 16px;
+    }
+
+    .intro {
+        color: var(--secondary-text);
+        font-size: 1rem;
+        margin-bottom: 0;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    .form-group {
+        margin-bottom: 22px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 700;
+        color: #34495e;
+    }
+
+    .required {
+        color: var(--error);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+        display: block;
+        width: 100%;
+        min-height: 48px;
+        padding: 12px 14px;
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        background-color: #ffffff;
+        color: #333333;
+        font-family: inherit;
+        font-size: 16px;
+        line-height: 1.4;
+        touch-action: manipulation;
+        transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    select {
+        cursor: pointer;
+    }
+
+    textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+        color: #8a939c;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+    }
+
+    input:invalid:not(:placeholder-shown),
+    textarea:invalid:not(:placeholder-shown) {
+        border-color: #d9534f;
+    }
+
+    .help-text {
+        display: block;
+        margin-top: 6px;
+        font-size: 0.85rem;
+        color: #737d87;
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        min-height: 50px;
+        padding: 13px 20px;
+        border: none;
+        border-radius: 7px;
+        background-color: var(--primary);
+        color: #ffffff;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        touch-action: manipulation;
+        transition:
+            background-color 0.2s ease,
+            transform 0.1s ease;
+    }
+
+    button:hover {
+        background-color: var(--primary-dark);
+    }
+
+    button:active {
+        transform: scale(0.99);
+    }
+
+    button:focus-visible {
+        outline: 3px solid rgba(52, 152, 219, 0.35);
+        outline-offset: 2px;
+    }
+
+    button:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+    }
+
+    .status {
+        display: none;
+        margin-top: 18px;
+        padding: 13px 15px;
+        border-radius: 7px;
+        font-size: 0.95rem;
+    }
+
+    .status.success {
+        display: block;
+        color: var(--success);
+        background: #edf8f2;
+        border: 1px solid #b9e4cc;
+    }
+
+    .status.error {
+        display: block;
+        color: var(--error);
+        background: #fff1f1;
+        border: 1px solid #efc1c1;
+    }
+
+    .contact-info {
+        margin-top: 32px;
+        padding: 18px;
+        background: var(--surface);
+        border-left: 5px solid var(--primary);
+        border-radius: 7px;
+    }
+
+    .contact-info p {
+        margin-bottom: 8px;
+        color: var(--secondary-text);
+    }
+
+    .contact-info p:last-child {
+        margin-bottom: 0;
+    }
+
+    .contact-info strong {
+        color: var(--text);
+    }
+
+    .contact-info a {
+        color: var(--primary-dark);
+        text-decoration: none;
+    }
+
+    .contact-info a:hover {
+        text-decoration: underline;
+    }
+
+    footer {
+        margin-top: 42px;
+        padding-top: 22px;
+        border-top: 1px solid #eeeeee;
+        text-align: center;
+        color: #737d87;
+        font-size: 0.88rem;
+    }
+
+    footer p {
+        margin: 0;
+    }
+
+    @media (min-width: 600px) {
+        body {
+            padding: 40px 24px;
+        }
+
+        button {
+            width: auto;
+            min-width: 180px;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+            transition: none !important;
+        }
+    }
+</style>
+
+</head><body><div class="container"><header>
     <h1>Report a Problem</h1>
 
-    <p>
+    <p class="intro">
         Use this page to report a problem with Solvian.
+        Please provide as much detail as possible so we can understand
+        and resolve the issue.
     </p>
+</header>
 
-</body>
-</html>
+<main>
+
+    <form id="problemForm" novalidate>
+
+        <div class="form-group">
+            <label for="name">
+                Your Name <span class="required" aria-hidden="true">*</span>
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                autocomplete="name"
+                required
+                maxlength="100"
+                placeholder="Enter your name"
+                aria-required="true"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="email">
+                Email Address <span class="required" aria-hidden="true">*</span>
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                autocomplete="email"
+                required
+                maxlength="150"
+                placeholder="Enter your email address"
+                aria-required="true"
+            >
+
+            <span class="help-text">
+                We may use this email address to respond to your report.
+            </span>
+        </div>
+
+        <div class="form-group">
+            <label for="issue-type">
+                Problem Type <span class="required" aria-hidden="true">*</span>
+            </label>
+
+            <select
+                id="issue-type"
+                name="issueType"
+                required
+                aria-required="true"
+            >
+                <option value="" selected disabled>
+                    Select a problem type
+                </option>
+
+                <option value="App Error / Bug">
+                    App Error / Bug
+                </option>
+
+                <option value="Website Error / Bug">
+                    Website Error / Bug
+                </option>
+
+                <option value="Account / Login Issue">
+                    Account / Login Issue
+                </option>
+
+                <option value="Feature Not Working">
+                    Feature Not Working
+                </option>
+
+                <option value="Performance Issue">
+                    Performance Issue
+                </option>
+
+                <option value="Data / Sync Issue">
+                    Data / Sync Issue
+                </option>
+
+                <option value="Privacy / Security Concern">
+                    Privacy / Security Concern
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="description">
+                Problem Description
+                <span class="required" aria-hidden="true">*</span>
+            </label>
+
+            <textarea
+                id="description"
+                name="description"
+                required
+                minlength="10"
+                maxlength="5000"
+                placeholder="Describe the problem in detail..."
+                aria-required="true"
+            ></textarea>
+
+            <span class="help-text">
+                Please include what happened and, if possible, what you
+                were doing when the problem occurred.
+            </span>
+        </div>
+
+        <button
+            type="submit"
+            id="submitButton"
+        >
+            Submit Report
+        </button>
+
+        <div
+            id="statusMessage"
+            class="status"
+            role="status"
+            aria-live="polite"
+        ></div>
+
+    </form>
+
+    <section class="contact-info" aria-label="Contact information">
+
+        <p>
+            <strong>Need immediate assistance?</strong>
+        </p>
+
+        <p>
+            You can also contact the Solvian support team directly.
+        </p>
+
+        <p>
+            <strong>Email:</strong>
+            <a href="mailto:contact.mrisllc@gmail.com">
+                contact.mrisllc@gmail.com
+            </a>
+            <br>
+
+            <strong>Phone:</strong>
+            <a href="tel:+8801937061091">
+                +880 1937 061091
+            </a>
+        </p>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Solvian. All rights reserved.</p>
+</footer>
+
+</div><script>
+    (function () {
+
+        "use strict";
+
+        const form = document.getElementById("problemForm");
+        const submitButton = document.getElementById("submitButton");
+        const statusMessage = document.getElementById("statusMessage");
+
+        const SUPPORT_EMAIL = "contact.mrisllc@gmail.com";
+
+        function showStatus(message, type) {
+            statusMessage.textContent = message;
+            statusMessage.className = "status " + type;
+        }
+
+        function clearStatus() {
+            statusMessage.textContent = "";
+            statusMessage.className = "status";
+        }
+
+        form.addEventListener("submit", function (event) {
+
+            event.preventDefault();
+
+            clearStatus();
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+
+                showStatus(
+                    "Please complete all required fields correctly.",
+                    "error"
+                );
+
+                return;
+            }
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const issueType = document.getElementById("issue-type").value;
+            const description = document.getElementById("description").value.trim();
+
+            if (name.length < 2) {
+                showStatus(
+                    "Please enter a valid name.",
+                    "error"
+                );
+
+                document.getElementById("name").focus();
+                return;
+            }
+
+            if (description.length < 10) {
+                showStatus(
+                    "Please provide a little more detail about the problem.",
+                    "error"
+                );
+
+                document.getElementById("description").focus();
+                return;
+            }
+
+            const subject =
+                "Solvian Problem Report - " + issueType;
+
+            const body =
+                "Solvian Problem Report\n\n" +
+                "Name: " + name + "\n" +
+                "Email: " + email + "\n" +
+                "Problem Type: " + issueType + "\n\n" +
+                "Problem Description:\n" +
+                description + "\n\n" +
+                "Sent from the Solvian Report a Problem page.";
+
+            const mailtoUrl =
+                "mailto:" +
+                SUPPORT_EMAIL +
+                "?subject=" +
+                encodeURIComponent(subject) +
+                "&body=" +
+                encodeURIComponent(body);
+
+            submitButton.disabled = true;
+            submitButton.textContent = "Opening Email...";
+
+            window.location.href = mailtoUrl;
+
+            setTimeout(function () {
+
+                submitButton.disabled = false;
+                submitButton.textContent = "Submit Report";
+
+                showStatus(
+                    "Your email app should now be open with the report prepared. Please review it and press Send.",
+                    "success"
+                );
+
+            }, 1200);
+
+        });
+
+    })();
+</script></body>
+    </html>
