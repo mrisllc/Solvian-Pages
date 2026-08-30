@@ -54,6 +54,9 @@
             border-bottom: 1px solid #e0e0e0;
             gap: 10px;
             scrollbar-width: thin;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         .category-scroll-container::-webkit-scrollbar {
             height: 4px;
@@ -83,11 +86,17 @@
             border-color: #0d6efd;
         }
 
-        /* কন্টেন্ট প্রদর্শনের মূল এরিয়া */
+        /* কন্টেন্ট প্রদর্শনের জন্য আইফ্রেম কনটেইনার */
         .content-area {
-            padding: 20px;
+            width: 100%;
             background-color: #ffffff;
             min-height: 80vh;
+        }
+        .content-area iframe {
+            width: 100%;
+            border: none;
+            overflow: hidden;
+            display: block;
         }
     </style>
 </head>
@@ -113,9 +122,9 @@
         <button class="cat-btn" data-key="articles" onclick="loadContent('https://mrisllc.github.io/Solvian-Pages/articles/', this)">Articles</button>
     </div>
 
-    <!-- ডায়নামিক কন্টেন্ট লোড হওয়ার এরিয়া -->
-    <div class="content-area" id="contentArea">
-        <!-- এখানে কন্টেন্ট লোড হবে -->
+    <!-- ডায়নামিক কন্টেন্ট লোড হওয়ার আইফ্রেম এরিয়া -->
+    <div class="content-area">
+        <iframe id="contentFrame" src="https://mrisllc.github.io/Solvian-Pages/terms-of-service.html" title="Solvian Content"></iframe>
     </div>
 
     <script>
@@ -139,35 +148,32 @@
             }
         };
 
-        // পেজ লোড হওয়ার সাথে সাথে প্রথম কন্টেন্ট (Terms of Service) লোড করা
-        window.onload = function() {
-            loadContent('https://mrisllc.github.io/Solvian-Pages/terms-of-service.html', document.querySelector('.cat-btn.active'));
+        // পেজ লোড হওয়ার সাথে সাথে আইফ্রেমের উচ্চতা স্বয়ংক্রিয়ভাবে সেট করার ফাংশন
+        const iframe = document.getElementById('contentFrame');
+        iframe.onload = function() {
+            adjustIframeHeight();
         };
 
-        // ফেচ (Fetch) এর মাধ্যমে লিংক থেকে কন্টেন্ট এনে দেখানোর ফাংশন
-        async function loadContent(url, element) {
+        // লিংক পরিবর্তনের ফাংশন
+        function loadContent(url, element) {
             // সব বাটন থেকে active ক্লাস সরিয়ে ফেলা এবং ক্লিক করা বাটনে যোগ করা
             let buttons = document.querySelectorAll('.cat-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             element.classList.add('active');
 
-            const contentArea = document.getElementById('contentArea');
-            contentArea.innerHTML = "<p style='text-align:center; padding: 20px; color:#666;'>Loading...</p>";
+            // আইফ্রেমের সোর্স পরিবর্তন করা
+            iframe.src = url;
+            window.scrollTo(0, 0); // পেজের উপরে স্ক্রল নিয়ে যাওয়া
+        }
 
+        // আইফ্রেমের কন্টেন্ট অনুযায়ী উচ্চতা অ্যাডজাস্ট করা যাতে মূল পেজে স্ক্রল কাজ করে
+        function adjustIframeHeight() {
             try {
-                const response = await fetch(url);
-                const htmlText = await response.text();
-                
-                // HTML পার্স করে মূল বডি কন্টেন্ট আলাদা করা
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(htmlText, 'text/html');
-                const bodyContent = doc.body ? doc.body.innerHTML : htmlText;
-                
-                contentArea.innerHTML = bodyContent;
-                window.scrollTo(0, 0); // কন্টেন্ট পরিবর্তনের পর পেজের উপরে স্ক্রল নিয়ে যাওয়া
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                const height = iframeDoc.documentElement.scrollHeight || iframeDoc.body.scrollHeight;
+                iframe.style.height = height + 50 + 'px';
             } catch (error) {
-                // CORS বা নেটওয়ার্ক সমস্যার কারণে ফেচ ব্যর্থ হলে আইফ্রেম (iframe) ফলব্যাক ব্যবহার করা
-                contentArea.innerHTML = `<iframe src="${url}" style="width:100%; height:800px; border:none;" title="Content"></iframe>`;
+                iframe.style.height = '1200px'; // ফলব্যাক উচ্চতা
             }
         }
 
