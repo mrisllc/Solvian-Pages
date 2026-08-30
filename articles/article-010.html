@@ -1,18 +1,260 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Solvian Article 010</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অ্যাপ ক্র্যাশ হওয়ার সম্ভাব্য কারণ | Solvian</title>
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --primary-dark: #0d47a1;
+            --text: #202124;
+            --text-light: #5f6368;
+            --border: #dadce0;
+            --bg: #ffffff;
+            --bg-light: #f8f9fa;
+            --success: #0f9d58;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
+            line-height: 1.75;
+            color: var(--text);
+            background: var(--bg-light);
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            background: var(--bg);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a73e8, #0d47a1);
+            color: white;
+            padding: 48px 40px 40px;
+            text-align: center;
+        }
+
+        header h1 { font-size: 1.8rem; font-weight: 600; margin-bottom: 10px; }
+        header p { opacity: 0.92; font-size: 1.05rem; }
+
+        .content { padding: 44px 40px 52px; }
+
+        .intro {
+            background: var(--bg-light);
+            border-left: 4px solid var(--primary);
+            padding: 18px 22px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 32px;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin: 36px 0 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+        }
+
+        h2:first-of-type { margin-top: 0; }
+
+        p { margin-bottom: 14px; }
+
+        ul, ol { margin: 12px 0 18px 24px; }
+        li { margin-bottom: 8px; }
+
+        .cause-card {
+            background: #f0f7ff;
+            border: 1px solid #d2e3fc;
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 14px 0;
+        }
+
+        .cause-card strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 6px;
+            font-size: 1.05rem;
+        }
+
+        .fix {
+            background: #e6f4ea;
+            border: 1px solid #ceead6;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+
+        .fix strong { color: var(--success); }
+
+        .step {
+            background: #f8f9fa;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 12px 0;
+        }
+
+        .warning {
+            background: #fef7e0;
+            border: 1px solid #fde293;
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin: 18px 0;
+        }
+
+        .contact-box {
+            background: var(--bg-light);
+            border-radius: 10px;
+            padding: 24px;
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            border-top: 1px solid var(--border);
+            background: var(--bg-light);
+        }
+
+        @media (max-width: 640px) {
+            body { padding: 16px 12px; }
+            header { padding: 36px 24px; }
+            header h1 { font-size: 1.4rem; }
+            .content { padding: 28px 20px 36px; }
+        }
+    </style>
 </head>
 <body>
-  <h1>Solvian Article 010</h1>
-  <p><strong>Category:</strong> General</p>
-  <p><strong>Date:</strong> 2026-08-29</p>
-  <hr>
-  <p>This is the official Solvian article #010.</p>
-  <p>Replace this content with your real article.</p>
-  <hr>
-  <p><a href="index.html">← Back to Articles</a></p>
+    <div class="container">
+        <header>
+            <h1>অ্যাপ ক্র্যাশ হওয়ার সম্ভাব্য কারণ</h1>
+            <p>Solvian – কেন অ্যাপ বন্ধ হয়ে যায় ও কী করবেন</p>
+        </header>
+
+        <div class="content">
+            <div class="intro">
+                অ্যাপ হঠাৎ বন্ধ হয়ে গেলে (ক্র্যাশ) সাধারণত নিচের কারণগুলোর কোনো একটা থাকে। 
+                প্রতিটি কারণের সাথে সমাধানও দেওয়া হলো।
+            </div>
+
+            <h2>১. সম্ভাব্য কারণসমূহ</h2>
+
+            <div class="cause-card">
+                <strong>১. পুরনো অ্যাপ ভার্সন</strong>
+                পুরনো ভার্সনে বাগ থাকতে পারে, যা নতুন আপডেটে ঠিক করা হয়।
+                <div class="fix"><strong>সমাধান:</strong> Play Store / App Store থেকে Solvian আপডেট করুন।</div>
+            </div>
+
+            <div class="cause-card">
+                <strong>২. কম স্টোরেজ জায়গা</strong>
+                ফোনে জায়গা কম থাকলে অ্যাপ ঠিকমতো চলতে পারে না।
+                <div class="fix"><strong>সমাধান:</strong> অপ্রয়োজনীয় ফাইল/অ্যাপ ডিলিট করে জায়গা খালি করুন।</div>
+            </div>
+
+            <div class="cause-card">
+                <strong>৩. কম র্যাম / অনেক অ্যাপ খোলা</strong>
+                ব্যাকগ্রাউন্ডে অনেক অ্যাপ চললে মেমোরি কমতে পারে এবং ক্র্যাশ হতে পারে।
+                <div class="fix"><strong>সমাধান:</strong> Recent apps থেকে অন্য অ্যাপ বন্ধ করুন, ফোন রিস্টার্ট করুন।</div>
+            </div>
+
+            <div class="cause-card">
+                <strong>৪. ক্যাশ করপ্ট বা পুরনো ডেটা</strong>
+                পুরনো ক্যাশ ফাইল সমস্যা তৈরি করতে পারে।
+                <div class="fix"><strong>সমাধান:</strong> Settings → Apps → Solvian → Storage → Clear Cache করুন।</div>
+            </div>
+
+            <div class="cause-card">
+                <strong>৫. অস্থির ইন্টারনেট</strong>
+                নেট হঠাৎ কেটে গেলে বা খুব দুর্বল হলে কিছু ক্ষেত্রে অ্যাপ আটকে বা ক্র্যাশ করতে পারে।
+                <div class="fix"><strong>সমাধান:</strong> স্থিতিশীল Wi-Fi বা ভালো মোবাইল ডেটা ব্যবহার করুন।</div>
+            </div>
+
+            <div class="cause-card">
+                <strong>৬. পুরনো অপারেটিং সিস্টেম</strong>
+                খুব পুরনো Android/iOS ভার্সনে নতুন অ্যাপ ভালো কাজ নাও করতে পারে।
+                <div class="fix"><strong>সমাধান:</strong> সম্ভব হলে সিস্টেম আপডেট করুন।</div>
+            </div>
+
+            <div class="cause-card">
+                <strong>৭. ডিভাইস ওভারহিট</strong>
+                ফোন খুব গরম হলে সিস্টেম অ্যাপ বন্ধ করে দিতে পারে।
+                <div class="fix"><strong>সমাধান:</strong> ফোন ঠান্ডা হতে দিন, চার্জ খুলে ব্যবহার করুন।</div>
+            </div>
+
+            <div class="cause-card">
+                <strong>৮. বিরোধপূর্ণ অ্যাপ (VPN, ক্লিনার, অ্যান্টিভাইরাস)</strong>
+                কিছু VPN বা ক্লিনার অ্যাপ অন্য অ্যাপের সাথে কনফ্লিক্ট করতে পারে।
+                <div class="fix"><strong>সমাধান:</strong> VPN/ক্লিনার সাময়িক বন্ধ করে Solvian চালিয়ে দেখুন।</div>
+            </div>
+
+            <div class="cause-card">
+                <strong>৯. ইনস্টলেশন ত্রুটি</strong>
+                অসম্পূর্ণ বা ক্ষতিগ্রস্ত ইনস্টলেশন ক্র্যাশের কারণ হতে পারে।
+                <div class="fix"><strong>সমাধান:</strong> অ্যাপ আনইনস্টল করে আবার ইনস্টল করুন।</div>
+            </div>
+
+            <div class="cause-card">
+                <strong>১০. সার্ভার বা অস্থায়ী বাগ</strong>
+                কখনো কখনো সার্ভার সমস্যা বা নতুন আপডেটের অস্থায়ী বাগ থাকতে পারে।
+                <div class="fix"><strong>সমাধান:</strong> কিছুক্ষণ পর আবার চেষ্টা করুন। বারবার হলে সাপোর্টে জানান।</div>
+            </div>
+
+            <h2>২. দ্রুত সমাধানের ধাপ</h2>
+            <div class="step"><strong>১.</strong> অ্যাপ সম্পূর্ণ বন্ধ করে আবার খুলুন।</div>
+            <div class="step"><strong>২.</strong> ফোন রিস্টার্ট করুন।</div>
+            <div class="step"><strong>৩.</strong> অ্যাপ আপডেট চেক করুন।</div>
+            <div class="step"><strong>৪.</strong> Clear Cache করুন।</div>
+            <div class="step"><strong>৫.</strong> স্টোরেজ জায়গা খালি করুন।</div>
+            <div class="step"><strong>৬.</strong> প্রয়োজনে অ্যাপ রিইনস্টল করুন।</div>
+
+            <div class="warning">
+                <strong>নোট:</strong> Clear Data বা রিইনস্টল করলে আবার লগইন করতে হতে পারে। 
+                গুরুত্বপূর্ণ ডেটা সার্ভারে থাকলে সাধারণত ফিরে আসে।
+            </div>
+
+            <h2>৩. কখন সাপোর্টে জানাবেন</h2>
+            <ul>
+                <li>উপরের সব ধাপ চেষ্টা করার পরও বারবার ক্র্যাশ হয়</li>
+                <li>নির্দিষ্ট একটি কাজ করলেই (যেমন: ছবি আপলোড) ক্র্যাশ হয়</li>
+                <li>আপডেটের পর থেকে সমস্যা শুরু হয়েছে</li>
+            </ul>
+
+            <div class="contact-box">
+                <p><strong>সাপোর্ট ইমেইল:</strong></p>
+                <p style="font-size: 1.15rem; color: var(--primary); margin: 8px 0;">
+                    <strong>[আপনার সাপোর্ট ইমেইল]</strong>
+                </p>
+                <p style="font-size: 0.95rem; color: var(--text-light); margin-top: 12px;">
+                    জানালে ভালো হয়:<br>
+                    • ডিভাইস মডেল ও OS ভার্সন<br>
+                    • অ্যাপ ভার্সন<br>
+                    • ক্র্যাশ কখন হয় (খোলার সময় / চ্যাটের সময় ইত্যাদি)<br>
+                    • স্ক্রিনশট বা সংক্ষিপ্ত বিবরণ
+                </p>
+            </div>
+
+            <p style="margin-top: 28px; text-align: center; color: var(--text-light);">
+                সম্পর্কিত: <strong>অ্যাপ লোড হচ্ছে না</strong> · <strong>সাইন ইন হচ্ছে না</strong>
+            </p>
+        </div>
+
+        <footer>
+            © ২০২৬ Solvian. সর্বস্বত্ব সংরক্ষিত।
+        </footer>
+    </div>
 </body>
 </html>
