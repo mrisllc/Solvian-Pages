@@ -44,7 +44,7 @@
             outline: none;
         }
 
-        /* হরিজন্টাল স্ক্রল ক্যাটাগরি বার (স্টিকি উঠিয়ে দেওয়া হয়েছে, যাতে কন্টেন্ট স্ক্রল করলে এটি স্বাভাবিক নিয়মে উপরে উঠে যায়) */
+        /* হরিজন্টাল স্ক্রল ক্যাটাগরি বার */
         .category-scroll-container {
             display: flex;
             overflow-x: auto;
@@ -146,9 +146,12 @@
 
         const iframe = document.getElementById('contentFrame');
 
-        // পেজ লোড হওয়ার পর আইফ্রেমের উচ্চতা সেট করা
+        // পেজ বা আইফ্রেম লোড হওয়ার পর কন্টেন্টের প্রকৃত উচ্চতা নিখুঁতভাবে সেট করা
         iframe.onload = function() {
             adjustIframeHeight();
+            // ইমেজ বা অন্যান্য কন্টেন্ট লোড হওয়ার পর পুনরায় হাইট আপডেট করার জন্য টাইমার
+            setTimeout(adjustIframeHeight, 200);
+            setTimeout(adjustIframeHeight, 500);
         };
 
         // লিংক পরিবর্তনের ফাংশন
@@ -161,18 +164,14 @@
             window.scrollTo(0, 0); // পেজের উপরে স্ক্রল নিয়ে যাওয়া
         }
 
-        // নিখুঁতভাবে আইফ্রেমের কন্টেন্টের উচ্চতা পরিমাপ করে অতিরিক্ত খালি জায়গা তৈরি হওয়া রোধ করা
+        // আইফ্রেমের ভেতরের উপাদানের প্রকৃত উচ্চতা হিসাব করার ফাংশন (খালি জায়গা রোধ করতে কার্যকর)
         function adjustIframeHeight() {
             try {
                 const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                if (iframeDoc) {
-                    const body = iframeDoc.body;
-                    const html = iframeDoc.documentElement;
-                    const height = Math.max(
-                        body.scrollHeight, body.offsetHeight,
-                        html.clientHeight, html.scrollHeight, html.offsetHeight
-                    );
-                    iframe.style.height = height + 'px';
+                if (iframeDoc && iframeDoc.body) {
+                    // কন্টেন্টের প্রকৃত উচ্চতা নিখুঁতভাবে বের করা
+                    const actualHeight = iframeDoc.body.scrollHeight;
+                    iframe.style.height = actualHeight + 'px';
                 }
             } catch (error) {
                 iframe.style.height = '600px';
