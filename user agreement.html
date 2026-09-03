@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Agreement - Solvian</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #f4f6f9;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 18px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0d6efd;
+        }
+
+        .back-btn {
+            background: #f1f3f5;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            color: #495057;
+            transition: 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #e9ecef;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .last-updated {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.35rem;
+            color: #0f172a;
+            margin: 32px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: #334155;
+        }
+
+        ul {
+            margin: 12px 0 20px 24px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #334155;
+        }
+
+        .contact-box {
+            background: #f8fafc;
+            border-left: 5px solid #0d6efd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .contact-box p {
+            margin-bottom: 6px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .card {
+                padding: 25px 20px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">Solvian</div>
+            <button class="back-btn" onclick="goBack()">← Back</button>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="container">
+        <div class="card">
+            <h1>User Agreement</h1>
+            <p class="last-updated">Last updated: September 2026</p>
+
+            <p>Welcome to <strong>Solvian</strong>. By accessing our website and purchasing our products, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.</p>
+
+            <h2>1. Use of the Website</h2>
+            <p>By accessing this website, you warrant that you are at least 18 years of age or visiting under the supervision of a parent or legal guardian. You agree to use this site only for lawful purposes and in a manner that does not infringe the rights of, or restrict the use and enjoyment of this site by any third party.</p>
+
+            <h2>2. Products, Pricing, and Orders</h2>
+            <p>All products listed on Solvian are subject to availability. We reserve the right to modify or discontinue any product at any time without notice. Prices for our products are also subject to change. We make every effort to display accurate descriptions and pricing, but errors may occur.</p>
+            <ul>
+                <li>We reserve the right to refuse or cancel any order for any reason.</li>
+                <li>In the event of a pricing error, we will contact you before processing the order.</li>
+            </ul>
+
+            <h2>3. Intellectual Property</h2>
+            <p>All content included on this site, such as text, graphics, logos, images, and software, is the property of Solvian and is protected by applicable copyright and intellectual property laws. You may not reproduce, duplicate, copy, or resell any part of our service without explicit written permission.</p>
+
+            <h2>4. Limitation of Liability</h2>
+            <p>Solvian shall not be liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use our website or products. We do not guarantee that the website will be uninterrupted or error-free.</p>
+
+            <h2>5. Changes to Terms</h2>
+            <p>We reserve the right to update, change, or replace any part of these Terms of Service by posting updates to our website. It is your responsibility to check this page periodically for changes.</p>
+
+            <h2>6. Contact Information</h2>
+            <div class="contact-box">
+                <p>If you have any questions about this User Agreement, please contact us:</p>
+                <p><strong>Email:</strong> support@solvianstore.com</p>
+                <p><strong>Phone:</strong> +880 1937 061091</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        © 2026 Solvian. All rights reserved.
+    </div>
+
+    <script>
+        function goBack() {
+            // If opened from another page
+            if (document.referrer) {
+                window.history.back();
+            } else {
+                // Fallback
+                window.location.href = "/";
+            }
+        }
+    </script>
+
+</body>
+</html>
